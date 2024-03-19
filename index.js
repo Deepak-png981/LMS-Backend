@@ -14,6 +14,11 @@ const courseModule = require('./routes/courseModule')
 const courseModuleItem = require('./routes/courseModuleItem')
 const lectureRouter = require('./routes/lecture');
 
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hi LMS backend is running fine </h1>')
+})
+
 app.use('/users', user)
 app.use('/courses', course)
 app.use('/courses/:courseId/modules', courseModule);
