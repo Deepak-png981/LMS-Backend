@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const auth = async (req, res, next) => {
     try {
+        let token;
         const authorization = req.get('authorization')
         if (authorization && authorization.startsWith('Bearer')) {
             token = authorization.substring(7)
@@ -26,6 +27,7 @@ const auth = async (req, res, next) => {
 
         req.token = token
         req.user = user
+        console.log("req.user : ", req.user);
         next()
     } catch (e) {
         // console.log(authorization)

@@ -101,8 +101,17 @@ const deleteUser = async (req, res) => {
 }
 
 const me = async (req, res) => {
-    res.send(req.user)
+    try {
+        // Retrieve user with enrollments populated
+        const userWithEnrollments = await User.findById(req.user._id).populate('enrollments');
+        res.send(userWithEnrollments);
+    } catch (e) {
+        console.log("Error:", e);
+        res.status(500).send('Internal Server Error');
+    }
 }
+
+
 
 module.exports = {
     createUser,
